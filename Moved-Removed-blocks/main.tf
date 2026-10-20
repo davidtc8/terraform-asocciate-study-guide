@@ -1,46 +1,28 @@
 # VPC
-resource "aws_vpc" "main" {
-  cidr_block = var.vpc_cidr
+removed {
+  from = aws_vpc.main
 
-  tags = {
-    Name = "${var.prefix}-subnet"
-    Environment = var.environment
-    Lab = var.lab_name
+  lifecycle {
+    destroy = false
   }
 }
 
 # Subnet
-resource "aws_subnet" "app" {
-  vpc_id = aws_vpc.main.id
-  cidr_block = var.subnet_cidr
+removed {
+  from = aws_subnet.app
 
-  tags = {
-    Name = "${var.prefix}-subnet"
-    Environment = var.environment
-    Lab = var.lab_name
+  lifecycle {
+    destroy = false
   }
 }
 
-# Route Table
-resource "aws_route_table" "main" {
-  vpc_id = aws_vpc.main.id
-
-  tags = {
-    Name = "${var.prefix}-rt"
-    Environment = var.environment
-    Lab = var.lab_name
-  }
-}
+# Route Table - removed
 
 # Security Groups
-resource "aws_security_group" "web" {
-  name = "${var.prefix}-web-sg"
-  description = "Lab security groups"
-  vpc_id = aws_vpc.main.id
+removed {
+  from = aws_security_group.app
 
-  tags = {
-    Name = "${var.prefix}-web-sg"
-    Environment = var.environment
-    Lab = var.lab_name
+  lifecycle {
+    destroy = false
   }
 }
